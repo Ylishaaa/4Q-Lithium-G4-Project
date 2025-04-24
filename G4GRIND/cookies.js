@@ -2,7 +2,7 @@ function setCookie(cookieName, cookieValue, days = 365, path = "/") {
       const date = new Date();
       date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
       let expires = "expires=" + date.toUTCString();
-      document.cookie = ${cookieName}=${cookieValue}; ${expires}; path=${path};
+      document.cookie = `${cookieName}=${cookieValue}; ${expires}; path=${path}`;
     }
 
     function getCookie(cookieName) {
