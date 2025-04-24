@@ -1,0 +1,110 @@
+body {
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Creepster', cursive;
+    margin: 0;
+    padding: 0;
+    color: white;
+  }
+  
+  .red {
+    color: #c21717;
+  }
+  
+  .navbar {
+    background: #701e16;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    font-family: 'Creepster', cursive;
+        }
+		
+   .navbar a {
+     color: black;
+     font-size: 20px;
+     text-decoration: none;
+     font-weight: bold;
+        }
+
+  
+  .main-content {
+    display: flex;
+    padding: 40px;
+    justify-content: space-around;
+    background: url('grunge-bg.jpg'); /* Optional textured bg */
+    background-size: cover;
+  }
+  
+  
+  
+  .bio-box {
+    background: url('Text\ here.png');;
+    background-size: cover;
+	background-color: rgba(255, 255, 255, 0.9);
+    color: black;
+    padding: 20px;
+    margin-top: 100px; /* 🧠 Pushes it below the header */
+    border-radius: 10px;
+    max-width: 40%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 10px red;
+    text-align: justify;
+	font-size:22px;
+  }
+  
+  .dev-section {
+	 margin-top: 60px;
+    text-align: center;
+    width: 50%;
+  }
+  
+  .dev-section h2 {
+    font-size: 2em;
+  }
+  
+  .dev-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-auto-rows: auto; /* Automatic row height */
+    gap: 20px;
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .dev-box {
+    border: 3px solid white;
+    height: 120px;
+    background: rgba(0,0,0,0.5);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+	
+  }
+  
+  .p{
+	  text-align: bottom;
+  }
+
+  .dev-box1 {
+    background-image: url('dave.jpg');
+	text-align: bottom;	/* Optional decorative border */
+}
+  .dev-box2 {
+    background-image: url('ylisha.jpg'); /* Optional decorative border */
+}
+  .dev-box3 {
+    background-image: url('armelle.jpg');	/* Optional decorative border */
+}
+  .dev-box4 {
+    background-image: url('shermaine.jfif'); /* Optional decorative border */
+}
+  .dev-box5 {
+    background-image: url('dave.jpg'); /* Optional decorative border */
+}
+  .dev-box6 {
+    background-image: url('dave.jpg'); /* Optional decorative border */
+}

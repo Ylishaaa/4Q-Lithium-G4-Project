@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Mechanics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet" />
+
+    <style>
+        body {
+            background-image: url('Background.png');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: black;
+            text-align: center;
+			margin: 0;
+			padding: 0;
+			overflow-x: hidden;
+        }
+        
+        .navbar {
+            background: #701e16;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            font-family: 'Creepster', cursive;
+        }
+
+            .navbar a {
+                color: black;
+                font-size: 20px;
+                text-decoration: none;
+                font-weight: bold;
+            }
+        .mechanics {
+            padding-top: 30px;
+            font-family: 'Creepster', cursive;
+        }
+
+            .mechanics p {
+                font-size: 20px;
+                padding-left: 15%;
+                padding-right: 15%;
+                text-align: justify;
+            }
+
+        .mechanics-1 {
+           background-color: white;
+           border: 2px solid red;
+           border-radius: 20px;
+           text-align: center;
+           width: 1000px;
+           box-sizing: border-box;
+           margin: 50px auto;
+           width: 90%;
+        }
+            
+            .descript {
+             font-size: 40px;
+             padding-top: 30px;
+            }
+            
+            .mechanics-1 h1{
+                font-size: 40px;
+                color: red;
+            }
+
+            .endpar{
+                padding-bottom: 45px;
+            }
+
+        .Maze-level {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 1000px;
+           
+        }
+
+        .levels {
+            background-color: white;
+            border: 2px solid red;
+            border-radius: 30px;
+            text-align: center;
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 300px;
+            padding: 20px;
+            overflow: auto;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1 / 1;
+        }
+        .levels p{
+            font-size: 75%;
+            text-align: justify;
+        }
+        .Maze-level h1 {
+        color: red;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="usab.html">🏠 HOME</a>
+		<a href="gamemechanics.html">GAME MECHANICS</a>
+        <a href="aboutus.html">ABOUT US</a>
+
+    </div>
+    <div class="mechanics">
+            <div class="mechanics-1">
+                <h1 class="descript">DESCRIPTION</h1>
+                <p>The goal of Amaze-ing Kyle  is to complete a series of challenging mazes while avoiding unexpected jumpscares </p>
+                <h1>HOW TO PLAY</h1>
+                <p class="endpar">
+                    Move like a maze master! Use the W, A, S, D keys or your trusty arrow keys to navigate through the twists and turns.
+
+                    Feeling overwhelmed by the spooky vibes? Smash the spacebar to pause and catch your breath.
+
+                    If things get creepy and overwhelming hit ESC to exit the game
+                </p>
+            </div>
+            <div class="Maze-level">
+                <div class="levels">
+                    <br />
+                    <h1>CHOOSE YOUR SCARE LEVEL</h1>
+                    <p>
+                        <b> Easy mode</b> -  A chill walk in the park. Simple maze, smaller steps and fewer jumpscare just a spooky sprinkles to make the game interesting and perfect for first time player and scared cats out there
+                    </p>
+                </div>
+                <div class="levels">
+                    <h1>CHOOSE YOUR SCARE LEVEL</h1>
+                    <p>
+                        <b>Intermediate mode</b> - Now we're turning up the tension. The maze is more complex, filled with sneaky twists and surprising turns. You'll need to take more steps, and the jump scares come at you when you least expect them. This level keeps you on your toes but won’t totally terrify you... probably.
+                    </p>
+                </div>
+                <div class="levels">
+                    <h1>CHOOSE YOUR SCARE LEVEL</h1>
+                    <p>
+                        <b>Hard mode</b> - You're in deep now. Darker mazes, creepy sounds, and jump scares that are definitely not your friend. Good luck you’ll need it!
+                    </p>
+                </div>
+            </div>
+    </div>
+</body>
+</html>
