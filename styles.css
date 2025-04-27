@@ -11,21 +11,49 @@ body {
     color: #c21717;
   }
   
-  .navbar {
-    background: #701e16;
-    padding: 20px;
+  .header-bar {
+    background: #701e16; 
+    height: 80px;
     display: flex;
-    justify-content: center;
-    gap: 40px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+  }
+  
+  /* Logo styling */
+  .logo {
     font-family: 'Creepster', cursive;
-        }
-		
-   .navbar a {
-     color: black;
-     font-size: 20px;
-     text-decoration: none;
-     font-weight: bold;
-        }
+    font-size: 48px;
+    color: white;
+    text-shadow: 0 0 10px black;
+  }
+  
+  /* "Maze" in red */
+  .logo .red {
+    color: #c21717;
+  }
+  
+  /* Navbar styling */
+  .navbar {
+    display: flex;
+    gap: 40px;
+  }
+  
+  .navbar a {
+    color: white;
+    font-size: 22px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px black;
+  }
+  
+  .navbar a:hover {
+    color: #c21717;
+    text-shadow: 0 0 10px #c21717, 0 0 20px #c21717;
+  }
 
   
   .main-content {
@@ -39,7 +67,8 @@ body {
   
   
   .bio-box {
-    background: url('Text\ here.png');;
+    background: url('Text\ here.png');
+    background-position: left center;
     background-size: cover;
 	background-color: rgba(255, 255, 255, 0.9);
     color: black;
@@ -53,6 +82,11 @@ body {
     box-shadow: 0 0 10px red;
     text-align: justify;
 	font-size:22px;
+    display: flex; /* Flexbox added */
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    text-align: justify;
+
   }
   
   .dev-section {
@@ -63,6 +97,7 @@ body {
   
   .dev-section h2 {
     font-size: 2em;
+    text-shadow: 1px 1px 2px black;
   }
   
   .dev-grid {
@@ -82,12 +117,19 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-	
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Push text to the bottom */
+    align-items: center;
+    text-shadow: 1px 1px 2px black;
+    text-align: center;
+    color: white;
   }
-  
-  .p{
-	  text-align: bottom;
-  }
+ 
+  .dev-box h3,
+  .dev-box p {
+    margin: 2px 0;
+}
 
   .dev-box1 {
     background-image: url('dave.jpg');
@@ -98,6 +140,7 @@ body {
 }
   .dev-box3 {
     background-image: url('armelle.jpg');	/* Optional decorative border */
+    background-position: center 20%;
 }
   .dev-box4 {
     background-image: url('shermaine.jfif'); /* Optional decorative border */
@@ -106,5 +149,7 @@ body {
     background-image: url('dave.jpg'); /* Optional decorative border */
 }
   .dev-box6 {
-    background-image: url('dave.jpg'); /* Optional decorative border */
+    background-image: url('risha.jpg'); /* Optional decorative border */
+    background-position: center 20%;
+    background-position: left 20%;
 }
