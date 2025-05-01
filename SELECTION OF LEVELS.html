@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="G4">
+    <meta name="date-submitted" content="4/24/25">
+    <title>Select a level</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet" />
+
+    <style>
+        body {
+    background-image: url('Background.png');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.header-bar {
+    background: #701e16;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+}
+
+.logo {
+    font-family: 'Creepster', cursive;
+    font-size: 48px;
+    color: white;
+    text-shadow: 0 0 10px black;
+}
+
+.logo .red {
+    color: #c21717;
+}
+
+.navbar {
+    display: flex;
+    gap: 40px;
+}
+
+.navbar a {
+    color: white;
+    font-family: 'Creepster', cursive;
+    font-size: 22px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px black;
+}
+
+.navbar a:hover {
+    color: #c21717;
+    text-shadow: 0 0 10px #c21717, 0 0 20px #c21717;
+}
+
+.Maze-level {
+    font-family: 'Creepster', cursive;
+    display: flex;
+    justify-content: space-between; 
+    gap: 20px;
+    max-width: 1000px; 
+    margin: 0 auto 50px;
+    padding: 50px;
+    flex-wrap: wrap; 
+}
+
+.levels {
+    background: url('levels.png');
+    background-size: cover;
+    border-radius: 20px;
+    border: 10px solid red;
+    width: 300px;
+    height: 400px;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+.levels.easy {
+    border-color: #e66b6b;
+    border-width: 10px;
+}
+
+.levels.medium {
+    border-color: #a80000;
+    border-width: 10px;
+}
+
+.levels.hard {
+    border-color: #6b0000;
+    border-width: 10px;
+}
+
+.levels h1 {
+    font-size: 30px;
+    color: black;
+    margin-bottom: 10px;
+    text-align: center;
+    white-space: nowrap; 
+}
+
+.levels h2 {
+    font-size: 24px;
+    color: red;
+    margin-bottom: 10px;
+    margin-top: -80px;
+}
+
+.levels p {
+    font-size: 15px;
+    text-align: justify;
+    text-justify: inter-word;
+    line-height: 1.4;
+}
+
+
+@keyframes float {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+.levels img {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: -60px; 
+    width: 60%;
+    height: auto;
+    border-radius: 10px;
+    animation: float 3s ease-in-out infinite;
+}
+
+    </style>
+</head>
+<body>
+
+    <header class="header-bar">
+        <h1 class="logo">
+           <span>A-</span><span class="red">MAZE</span>-ING KYLE!
+        </h1>
+        
+        <nav class="navbar">
+          <a href="index.html"> HOME</a>
+		  <a href="gamemechanics.html"> GAME MECHANICS</a>
+		  <a href="aboutus.html"> ABOUT US</a>
+        </nav>
+  </header>
+
+    </div>
+            <div class="Maze-level">
+                <div class="levels easy">
+                    
+                    <h1 class="level-header">CHOOSE YOUR<br>SCARE LEVEL</h1>
+                    <h2>Easy Mode</h2>
+                    <a href="ndsjncexkds.html">
+                        <img src="easy.png" alt="Easy Mode Image" class="level-image">
+                    </a>
+                    
+                </div>
+                <div class="levels medium">
+                    <h1 class="level-header">CHOOSE YOUR<br>SCARE LEVEL</h1>
+                    <h2>Intermediate mode</h2>
+                    <a href="nfdscknmkw.html">
+                        <img src="medium.png" alt="Intermediate Mode Image" class="level-image">
+                    </a>
+                        
+                    
+                </div>
+                <div class="levels hard">
+                    <h1 class="level-header">CHOOSE YOUR<br>SCARE LEVEL</h1>
+                    <h2>Hard mode</h2>
+                    <a href="nceiskcmwxs.html">
+                        <img src="hard.png" alt="Hard Mode Image" class="level-image">
+                    </a>
+                    
+                </div>
+            </div>
+    </div>
+</body>
+</html>
