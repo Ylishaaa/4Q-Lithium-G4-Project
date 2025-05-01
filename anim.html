@@ -1,0 +1,24 @@
+<html>
+<head>
+	<style>
+		#sprite {
+			background: url(sprite.png) no-repeat -60px -127px;
+			width: 72px;
+			height: 72px;
+			animation: anim1 1s steps(4) infinite;
+		}
+		
+		@keyframes anim1 {
+			from {
+				background-position: -60px -127px;
+			}
+			to {
+				background-position: -318px -127px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="sprite"></div>
+</body>
+</html>
