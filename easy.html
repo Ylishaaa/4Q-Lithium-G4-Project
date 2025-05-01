@@ -33,11 +33,12 @@
     .player {
       width: 72px;
       height: 72px;
-      background: url('sprite.png') no-repeat 0 0;
-      background-size: cover;
+      background: url('sprite.png') no-repeat -60px -13px;
+      background-size: auto;
       z-index: 2;
       transform: translate(0px, 320px);
     }
+
 
     .walk-down {
       background: url('sprite_down.png') no-repeat -60px -13px;
@@ -246,14 +247,14 @@ function movePlayer() {
     moved = true;
   }
 
-  playerX = Math.max(0, Math.min(playerX, canvas.width - 48));
-  playerY = Math.max(0, Math.min(playerY, canvas.height - 48));
+  playerX = Math.max(0, Math.min(playerX, canvas.width - 72));
+  playerY = Math.max(0, Math.min(playerY, canvas.height - 72));
   if (!moved) clearAnimation();
 
   try {
     const pixel = ctx.getImageData(playerX + 24, playerY + 24, 1, 1).data;
     const [r, g, b] = pixel;
-    const isPath = r < 50 && g < 50 && b < 50;
+    const isPath = r > 200 && g > 200 && b > 200;
     if (isPath) {
       player.style.transform = `translate(${playerX}px, ${playerY}px)`;
     } else {
