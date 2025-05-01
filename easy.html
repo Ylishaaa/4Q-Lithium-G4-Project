@@ -31,30 +31,24 @@
     }
 
     .player {
-      width: 48px;
-      height: 48px;
+      width: 72px;
+      height: 72px;
       background: url('sprite.png') no-repeat -60px -13px;
       background-size: 384px 288px;
       z-index: 2;
       transform: translate(0px, 320px);
     }
 
-     .walk-down {
+    .walk-down {
       background: url('sprite_down.png') no-repeat -60px -13px;
-      width: 72px;
-      height: 72px;
       animation: walk1 0.6s steps(4) infinite;
     }
     .walk-left {
       background: url('sprite.png') no-repeat -60px -127px;
-      width: 72px;
-      height: 72px;
       animation: walk2 0.6s steps(4) infinite;
     }
     .walk-right {
       background: url('sprite.png') no-repeat -60px -190px;
-      width: 72px;
-      height: 72px;
       animation: walk3 0.6s steps(4) infinite;
     }
     .walk-up {
@@ -105,6 +99,13 @@
       z-index: 10;
     }
 
+    #resetButton {
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      font-size: 16px;
+      z-index: 10;
+    }
 
     .jumpscare {
       position: fixed;
@@ -162,6 +163,8 @@
 <div id="timer">Time: 60</div>
 <div id="score">Score: 0</div>
 <div id="hiScore">HI-SCORE: 0</div>
+<button id="resetButton" onclick="resetHiScore()">Reset HI-SCORE</button>
+
 <a href="index.html">
   <img src="arrowtoplay.png" alt="arrowtoreturn" class="arrow">
 </a>
@@ -178,7 +181,7 @@
   <h2>🎉 CONGRATULATIONS! YOU FINISHED THE MAZE!</h2>
   <p id="finalScore"></p>
   <button onclick="location.reload()">Play Again</button>
-  <button onclick="alert('Thanks for playing!')" href="index.html">Exit</button>
+  <button onclick="alert('Thanks for playing!')">Exit</button>
 </div>
 
 <script>
@@ -190,9 +193,6 @@ const step = 3.5;
 let playerX = 0;
 let playerY = 320;
 
-let hiScore = localStorage.getItem('hiScore') || 0;
-document.getElementById('hiScore').textContent = `HI-SCORE: ${hiScore}`;
-
 let keysPressed = {};
 let score = 0;
 let timeLeft = 60;
@@ -201,6 +201,18 @@ let timerInterval;
 let jumpscareCount = 0;
 const maxJumpscares = 2;
 const jumpscares = ["ezjump1.jpg", "ezjump2.jpg"];
+
+function updateHiScoreDisplay() {
+  const hiScore = localStorage.getItem('hiScore') || 0;
+  document.getElementById('hiScore').textContent = `HI-SCORE: ${hiScore}`;
+}
+
+function resetHiScore() {
+  localStorage.removeItem('hiScore');
+  updateHiScoreDisplay();
+}
+
+updateHiScoreDisplay();
 
 const mazeImage = new Image();
 mazeImage.src = "maze.png";
@@ -256,7 +268,7 @@ function movePlayer() {
   }
 
   try {
-    const pixel = ctx.getImageData(newX + 24, newY + 24, 1, 1).data;
+    const pixel = ctx.getImageData(newX + 36, newY + 36, 1, 1).data;
     const [r, g, b] = pixel;
     const isPath = r < 100 && g < 100 && b < 100;
     if (isPath) {
@@ -294,20 +306,18 @@ function checkWin() {
     document.getElementById('score').textContent = `Score: ${score}`;
     document.getElementById('finalScore').textContent = `Your final score: ${score}`;
     document.getElementById('winPopup').style.display = 'block';
-    document.removeEventListener('keydown', moveHandler);
-    document.removeEventListener('keyup', keyUpHandler);
 
     const hiScore = localStorage.getItem('hiScore') || 0;
     if (score > hiScore) {
       localStorage.setItem('hiScore', score);
     }
-    document.getElementById('hiScore').textContent = `HI-SCORE: ${localStorage.getItem('hiScore')}`;
+    updateHiScoreDisplay();
   }
 }
 
 function triggerJumpscare() {
   if (jumpscareCount >= maxJumpscares) return;
-  if (Math.random() < 0.005) {
+  if (Math.random() < 0.01) {
     const img = jumpscares[Math.floor(Math.random() * jumpscares.length)];
     const jumpscare = document.getElementById('jumpscare');
     jumpscare.style.backgroundImage = `url('${img}')`;
