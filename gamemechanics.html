@@ -10,117 +10,162 @@
 
     <style>
         body {
-            background-image: url('Background.png');
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-color: black;
-            text-align: center;
-			margin: 0;
-			padding: 0;
-			overflow-x: hidden;
-        }
-        
-        .navbar {
-            background: #701e16;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            font-family: 'Creepster', cursive;
-        }
+    background-image: url('Background.png');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
 
-            .navbar a {
-                color: black;
-                font-size: 20px;
-                text-decoration: none;
-                font-weight: bold;
-            }
-        .mechanics {
-            padding-top: 30px;
-            font-family: 'Creepster', cursive;
-        }
+.header-bar {
+    background: #701e16;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+}
 
-            .mechanics p {
-                font-size: 20px;
-                padding-left: 15%;
-                padding-right: 15%;
-                text-align: justify;
-            }
+.logo {
+    font-family: 'Creepster', cursive;
+    font-size: 48px;
+    color: white;
+    text-shadow: 0 0 10px black;
+}
 
-        .mechanics-1 {
-           background-color: white;
-           border: 2px solid red;
-           border-radius: 20px;
-           text-align: center;
-           width: 1000px;
-           box-sizing: border-box;
-           margin: 50px auto;
-           width: 90%;
-        }
-            
-            .descript {
-             font-size: 40px;
-             padding-top: 30px;
-            }
-            
-            .mechanics-1 h1{
-                font-size: 40px;
-                color: red;
-            }
+.logo .red {
+    color: #c21717;
+}
 
-            .endpar{
-                padding-bottom: 45px;
-            }
+.navbar {
+    display: flex;
+    gap: 40px;
+}
 
-        .Maze-level {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin: 0 auto;
-            padding: 20px;
-            max-width: 1000px;
-           
-        }
+.navbar a {
+    color: white;
+    font-family: 'Creepster', cursive;
+    font-size: 22px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px black;
+}
 
-        .levels {
-            background-color: white;
-            border: 2px solid red;
-            border-radius: 30px;
-            text-align: center;
-            box-sizing: border-box;
-            width: 100%;
-            max-width: 300px;
-            padding: 20px;
-            overflow: auto;
-            align-items: center;
-            justify-content: center;
-            aspect-ratio: 1 / 1;
-        }
-        .levels p{
-            font-size: 75%;
-            text-align: justify;
-        }
-        .Maze-level h1 {
-        color: red;
-        }
+.navbar a:hover {
+    color: #c21717;
+    text-shadow: 0 0 10px #c21717, 0 0 20px #c21717;
+}
 
+.mechanics {
+    padding-top: 30px;
+    font-family: 'Creepster', cursive;
+}
+
+.mechanics-1 {
+    background-color: white;
+    border: 2px solid #701e16;
+    border-width: 10px;
+    border-radius: 20px;
+    margin: 40px auto;
+    padding: 30px 40px;
+    max-width: 900px;
+    text-align: center;
+}
+
+.mechanics-1 h1 {
+    font-size: 40px;
+    color: red;
+    margin-bottom: 10px;
+}
+
+.mechanics-1 p {
+    font-family: 'Creepster', cursive;
+    font-size: 30px;
+    color: black;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+.Maze-level {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto 50px;
+    padding: 10px;
+}
+
+.levels {
+    background: url('levels.png');
+    background-size: cover;
+    border: 2px solid red;
+    border-radius: 20px;
+    width: 280px;
+    padding: 20px;
+    box-sizing: border-box;
+    aspect-ratio: 1 / 1;
+}
+
+.levels.easy {
+    border-color: #e66b6b; 
+    border-width: 10px;
+}
+
+.levels.medium {
+    border-color: #a80000;
+    border-width: 10px; 
+}
+
+.levels.hard {
+    border-color: #6b0000; 
+    border-width: 10px;
+}
+
+.levels h2 {
+    font-family: 'Creepster', cursive;
+    font-size: 22px;
+    color: red;
+    margin-bottom: 10px;
+}
+
+.levels p {
+    font-family: 'Creepster', cursive;
+    font-size: 15px;
+    text-align: justify;
+    text-justify: inter-word;
+    line-height: 1.4;
+}
         
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <a href="index.html">🏠 HOME</a>
-		<a href="gamemechanics.html">GAME MECHANICS</a>
-        <a href="aboutus.html">ABOUT US</a>
+
+    <header class="header-bar">
+        <h1 class="logo">
+           <span>A-</span><span class="red">MAZE</span>-ING KYLE!
+        </h1>
+        
+        <nav class="navbar">
+          <a href="index.html"> HOME</a>
+		  <a href="gamemechanics.html"> GAME MECHANICS</a>
+		  <a href="aboutus.html"> ABOUT US</a>
+        </nav>
+  </header>
 
     </div>
     <div class="mechanics">
             <div class="mechanics-1">
                 <h1 class="descript">DESCRIPTION</h1>
-                <p>The goal of Amaze-ing Kyle  is to complete a series of challenging mazes while avoiding unexpected jumpscares </p>
+                <p>The goal of A-maze-ing Kyle  is to complete a series of challenging mazes while avoiding unexpected jumpscares </p>
                 <h1>HOW TO PLAY</h1>
                 <p class="endpar">
                     Move like a maze master! Use the W, A, S, D keys or your trusty arrow keys to navigate through the twists and turns.
@@ -131,23 +176,26 @@
                 </p>
             </div>
             <div class="Maze-level">
-                <div class="levels">
-                    <br />
+                <div class="levels easy">
+                    
                     <h1>CHOOSE YOUR SCARE LEVEL</h1>
+                    <h2> Easy mode</h2>
                     <p>
-                        <b> Easy mode</b> -  A chill walk in the park. Simple maze, smaller steps and fewer jumpscare just a spooky sprinkles to make the game interesting and perfect for first time player and scared cats out there
+                         A chill walk in the park. Simple maze, smaller steps and fewer jumpscare just a spooky sprinkles to make the game interesting and perfect for first time player and scared cats out there
                     </p>
                 </div>
-                <div class="levels">
+                <div class="levels medium">
                     <h1>CHOOSE YOUR SCARE LEVEL</h1>
-                    <p>
-                        <b>Intermediate mode</b> - Now we're turning up the tension. The maze is more complex, filled with sneaky twists and surprising turns. You'll need to take more steps, and the jump scares come at you when you least expect them. This level keeps you on your toes but won’t totally terrify you... probably.
-                    </p>
+                    <h2>Intermediate mode</h2> 
+                    <p>Now we're turning up the tension. The maze is more complex, filled with sneaky twists and surprising turns. You'll need to take more steps, and the jump scares come at you when you least expect them. This level keeps you on your toes but won’t totally terrify you... probably.
+                    </p>    
+                    
                 </div>
-                <div class="levels">
+                <div class="levels hard">
                     <h1>CHOOSE YOUR SCARE LEVEL</h1>
+                    <h2>Hard mode</h2>
                     <p>
-                        <b>Hard mode</b> - You're in deep now. Darker mazes, creepy sounds, and jump scares that are definitely not your friend. Good luck you’ll need it!
+                         You're in deep now. Darker mazes, creepy sounds, and jump scares that are definitely not your friend. Good luck you’ll need it!
                     </p>
                 </div>
             </div>
