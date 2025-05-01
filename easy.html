@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ez MODE</title>
+  <title>EZ MODE</title>
   <style>
     body {
       background: black;
@@ -100,12 +100,6 @@
       top: 40px;
     }
 
-    #hiScore {
-      top: 70px;
-      color: gold;
-    }
-
-
     .jumpscare {
       position: fixed;
       top: 0;
@@ -161,7 +155,6 @@
 
 <div id="timer">Time: 60</div>
 <div id="score">Score: 0</div>
-<div id="hiScore">HI-SCORE: 0</div>
 
 <div class="maze-container">
   <canvas id="mazeCanvas" width="1000" height="1000" style="width:1000px; height:1000px;"></canvas>
@@ -201,7 +194,6 @@ const mazeImage = new Image();
 mazeImage.src = "maze.png";
 mazeImage.onload = () => {
   ctx.drawImage(mazeImage, 0, 0, canvas.width, canvas.height);
-  gameLoop();  // Start game only after maze is drawn
 };
 
 const jumpscares = ["ezjump1.jpg", "ezjump2.jpg"];
@@ -210,7 +202,7 @@ function startTimer() {
   const timerDisplay = document.getElementById('timer');
   timerInterval = setInterval(() => {
     timeLeft--;
-    timerDisplay.textContent = `Time: ${timeLeft}`;
+    timerDisplay.textContent = Time: ${timeLeft};
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
       alert("⏰ Time's up! You didn't complete the level.");
@@ -263,7 +255,7 @@ function movePlayer() {
     const [r, g, b] = pixel;
     const isPath = r < 50 && g < 50 && b < 50;
     if (isPath) {
-      player.style.transform = `translate(${playerX}px, ${playerY}px)`;
+      player.style.transform = translate(${playerX}px, ${playerY}px);
     } else {
       if (keysPressed['arrowup'] || keysPressed['w']) playerY += step;
       if (keysPressed['arrowdown'] || keysPressed['s']) playerY -= step;
@@ -299,17 +291,11 @@ function checkWin() {
   ) {
     clearInterval(timerInterval);
     score = timeLeft * 10;
-    document.getElementById('score').textContent = `Score: ${score}`;
-    document.getElementById('finalScore').textContent = `Your final score: ${score}`;
+    document.getElementById('score').textContent = Score: ${score};
+    document.getElementById('finalScore').textContent = Your final score: ${score};
     document.getElementById('winPopup').style.display = 'block';
     document.removeEventListener('keydown', moveHandler);
     document.removeEventListener('keyup', keyUpHandler);
-
-    const hiScore = localStorage.getItem('hiScore') || 0;
-    if (score > hiScore) {
-      localStorage.setItem('hiScore', score);
-    }
-    document.getElementById('hiScore').textContent = `HI-SCORE: ${localStorage.getItem('hiScore')}`;
   }
 }
 
@@ -331,9 +317,7 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 }
 
-document.getElementById('hiScore').textContent = `HI-SCORE: ${localStorage.getItem('hiScore') || 0}`;
-
-/*gameLoop();*/
+gameLoop();
 </script>
 
 </body>
