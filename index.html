@@ -59,6 +59,26 @@
 }
 
 
+.arrow {
+    position: fixed;
+    margin-top: 290px;
+    right: 540px;
+    width: 80px;
+    height: auto;
+    animation: shine 2s infinite;
+}
+
+        @keyframes shine {
+    0%, 100% {
+        filter: drop-shadow(0 0 5px black);
+    }
+    50% {
+        filter: drop-shadow(0 0 20px black);
+    }
+}
+
+
+
         .username-container {
             position: absolute;
             top: 80%;
@@ -93,6 +113,11 @@
     <h1 class="logo">
        <span>A-</span><span class="red">MAZE</span>-ING KYLE!
     </h1>
+
+    <a href="SELECTION OF LEVELS.html">
+        <img src="arrowtoplay.png" alt="arrowtostartplaying" class="arrow">
+    </a>
+    
     
     <nav class="navbar">
       <a href="index.html"> HOME</a>
