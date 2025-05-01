@@ -97,9 +97,14 @@
     }
 
     #hiScore {
+  color: yellow;
+  position: fixed;
   top: 70px;
-  color: gold;
+  right: 20px;
+  font-size: 18px;
+  z-index: 10;
 }
+
 
     .jumpscare {
       position: fixed;
@@ -182,6 +187,9 @@ const step = 3.5;
 
 let playerX = 0;
 let playerY = 320;
+
+let hiScore = localStorage.getItem('hiScore') || 0;
+document.getElementById('hiScore').textContent = `HI-SCORE: ${hiScore}`;
 
 let keysPressed = {};
 let score = 0;
