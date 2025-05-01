@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>EASY MODE</title>
+  <title>EASY/title>
   <style>
     body {
       background: black;
@@ -39,20 +39,28 @@
       transform: translate(0px, 320px);
     }
 
-    .walk-down {
+     .walk-down {
+      background: url('sprite_down.png') no-repeat -60px -13px;
+      width: 72px;
+      height: 72px;
       animation: walk1 0.6s steps(4) infinite;
     }
-
     .walk-left {
+      background: url('sprite.png') no-repeat -60px -127px;
+      width: 72px;
+      height: 72px;
       animation: walk2 0.6s steps(4) infinite;
     }
-
     .walk-right {
+      background: url('sprite.png') no-repeat -60px -190px;
+      width: 72px;
+      height: 72px;
       animation: walk3 0.6s steps(4) infinite;
     }
-
     .walk-up {
+      background: url('sprite.png') no-repeat -60px -210px;
       animation: walk4 0.6s steps(4) infinite;
+      background-size: cover;
     }
 
     @keyframes walk1 {
@@ -87,6 +95,11 @@
     #score {
       top: 40px;
     }
+
+    #hiScore {
+  top: 70px;
+  color: gold;
+}
 
     .jumpscare {
       position: fixed;
@@ -143,6 +156,8 @@
 
 <div id="timer">Time: 60</div>
 <div id="score">Score: 0</div>
+<div id="hiScore">HI-SCORE: 0</div>
+
 
 <div class="maze-container">
   <canvas id="mazeCanvas" width="1000" height="1000"></canvas>
@@ -272,6 +287,12 @@ function checkWin() {
     document.getElementById('winPopup').style.display = 'block';
     document.removeEventListener('keydown', moveHandler);
     document.removeEventListener('keyup', keyUpHandler);
+
+    const hiScore = localStorage.getItem('hiScore') || 0;
+    if (score > hiScore) {
+      localStorage.setItem('hiScore', score);
+    }
+    document.getElementById('hiScore').textContent = `HI-SCORE: ${localStorage.getItem('hiScore')}`;
   }
 }
 
