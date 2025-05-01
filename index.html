@@ -16,6 +16,47 @@
 			padding: 0;
             color: white;
         }
+        .header-bar {
+    background: #701e16;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+}
+
+.logo {
+    font-family: 'Creepster', cursive;
+    font-size: 48px;
+    color: white;
+    text-shadow: 0 0 10px black;
+}
+
+.logo .red {
+    color: #c21717;
+}
+
+.navbar {
+    display: flex;
+    gap: 40px;
+}
+
+.navbar a {
+    color: white;
+    font-family: 'Creepster', cursive;
+    font-size: 22px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px black;
+}
+
+.navbar a:hover {
+    color: #c21717;
+    text-shadow: 0 0 10px #c21717, 0 0 20px #c21717;
+}
 
 
         .username-container {
@@ -45,28 +86,21 @@
         .start-btn:hover {
             background: #a0a0a0;
         }
-		.navbar {
-            background: #701e16;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            font-family: 'Creepster', cursive;
-        }
-        .navbar a {
-            color: black;
-            font-size: 20px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+		
     </style>
 </head>
-<body onload="checkUsername()">
-    <div class="navbar">
-        <a href="index.html">🏠 HOME</a>
-        <a href="gamemechanics.html">GAME MECHANICS</a>
-        <a href="aboutus.html">ABOUT US</a>
-    </div>
+<header class="header-bar">
+    <h1 class="logo">
+       <span>A-</span><span class="red">MAZE</span>-ING KYLE!
+    </h1>
+    
+    <nav class="navbar">
+      <a href="index.html"> HOME</a>
+      <a href="gamemechanics.html"> GAME MECHANICS</a>
+      <a href="aboutus.html"> ABOUT US</a>
+    </nav>
+</header>
+
 <body onload="checkUsername()">
     <div class="username-container">
         <h2 id="greeting">ENTER YOUR USERNAME:</h2>
