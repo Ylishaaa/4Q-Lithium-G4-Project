@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>EASY LEVEL</title>
+  <title>EASY</title>
   <style>
     body {
       background: black;
@@ -16,6 +16,8 @@
       width: 1000px;
       height: 1000px;
       margin: 0 auto;
+      border: 5px solid white;
+      overflow: hidden;
     }
 
     canvas, .player, #finishLine {
@@ -249,6 +251,9 @@ function movePlayer() {
   let newY = playerY;
   let moved = false;
 
+  const mazeWidth = 1000 - 72;
+  const mazeHeight = 1000 - 72;
+
   if (keysPressed['arrowup'] || keysPressed['w']) {
     newY -= step;
     setAnimation('up');
@@ -266,6 +271,10 @@ function movePlayer() {
     setAnimation('right');
     moved = true;
   }
+
+  // Clamp player to maze bounds
+  newX = Math.max(0, Math.min(newX, mazeWidth));
+  newY = Math.max(0, Math.min(newY, mazeHeight));
 
   try {
     const pixel = ctx.getImageData(newX + 36, newY + 36, 1, 1).data;
