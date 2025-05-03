@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>EASY LEVEL</title>
+  <title>EASY</title>
   <style>
     body {
       background: black;
@@ -36,7 +36,7 @@
       background: url('sprite.png') no-repeat -60px -13px;
       background-size: 384px 288px;
       z-index: 2;
-      transform: translate(0px, 320px);
+      transform: translate(15px, 270px);
     }
 
     .walk-down {
@@ -86,9 +86,7 @@
       z-index: 10;
     }
 
-    #score {
-      top: 40px;
-    }
+    #score { top: 40px; }
 
     #hiScore {
       color: yellow;
@@ -143,8 +141,8 @@
     #finishLine {
       width: 30px;
       height: 30px;
-      top: 460px;
-      left: 730px;
+      top: 270px;
+      left: 940px;
       background: linear-gradient(to right, limegreen, yellow);
       z-index: 1;
       border: 2px solid white;
@@ -190,8 +188,8 @@ const ctx = canvas.getContext('2d');
 const player = document.getElementById('player');
 const step = 3.5;
 
-let playerX = 0;
-let playerY = 320;
+let playerX = 15;
+let playerY = 270;
 
 let keysPressed = {};
 let score = 0;
@@ -215,7 +213,7 @@ function resetHiScore() {
 updateHiScoreDisplay();
 
 const mazeImage = new Image();
-mazeImage.src = "maze.png";
+mazeImage.src = "maze2.PNG";
 mazeImage.onload = () => {
   ctx.drawImage(mazeImage, 0, 0, canvas.width, canvas.height);
 };
@@ -244,6 +242,27 @@ document.addEventListener('keyup', e => {
   clearAnimation();
 });
 
+function isPath(x, y) {
+  try {
+    const pixel = ctx.getImageData(x, y, 1, 1).data;
+    const [r, g, b] = pixel;
+    return r < 100 && g < 100 && b < 100;
+  } catch (e) {
+    return false;
+  }
+}
+
+function isInsideMaze(x, y) {
+  try {
+    const pixel = ctx.getImageData(x + 36, y + 36, 1, 1).data;
+    const [r, g, b] = pixel;
+    // Block blue border (not black/gray path)
+    return (r < 100 && g < 100 && b < 100) || (r > 150 && g > 150 && b > 150);
+  } catch (e) {
+    return false;
+  }
+}
+
 function movePlayer() {
   let newX = playerX;
   let newY = playerY;
@@ -267,22 +286,19 @@ function movePlayer() {
     moved = true;
   }
 
-  try {
-    const pixel = ctx.getImageData(newX + 36, newY + 36, 1, 1).data;
-    const [r, g, b] = pixel;
-    const isPath = r < 100 && g < 100 && b < 100;
-    if (isPath) {
-      playerX = newX;
-      playerY = newY;
-      player.style.transform = `translate(${playerX}px, ${playerY}px)`;
-    }
-  } catch (e) {
-    // Ignore errors, usually when outside canvas
+  if (isPath(newX + 36, newY + 36) && isInsideMaze(newX, newY)) {
+    playerX = newX;
+    playerY = newY;
+    updatePlayerPosition();
   }
 
   if (!moved) clearAnimation();
   triggerJumpscare();
   checkWin();
+}
+
+function updatePlayerPosition() {
+  player.style.transform = `translate(${playerX}px, ${playerY}px)`;
 }
 
 function setAnimation(direction) {
