@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>EZ</title>
+  <title>EASY</title>
   <style>
     body {
       background: green;
@@ -16,6 +16,8 @@
       width: 1000px;
       height: 1000px;
       margin: 0 auto;
+      border: 8px solid blue; /* ✅ Added blue border */
+      box-sizing: content-box; /* ✅ Keeps 1000x1000 canvas area inside the border */
     }
 
     canvas, .player, #finishLine {
@@ -195,6 +197,7 @@ let timeLeft = 60;
 let timerStarted = false;
 let timerInterval;
 let jumpscareCount = 0;
+let gameEnded = false;
 const maxJumpscares = 2;
 const jumpscares = ["ezjump1.jpg", "ezjump2.jpg"];
 
@@ -230,7 +233,8 @@ function startTimer() {
 
 document.addEventListener('keydown', e => {
   keysPressed[e.key.toLowerCase()] = true;
-  if (!timerStarted) {
+  const movementKeys = ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd'];
+  if (!timerStarted && movementKeys.includes(e.key.toLowerCase())) {
     startTimer();
     timerStarted = true;
   }
@@ -240,7 +244,18 @@ document.addEventListener('keyup', e => {
   clearAnimation();
 });
 
+function isWalkable(x, y) {
+  try {
+    const pixel = ctx.getImageData(x + 36, y + 36, 1, 1).data;
+    return pixel[0] < 100 && pixel[1] < 100 && pixel[2] < 100;
+  } catch {
+    return false;
+  }
+}
+
 function movePlayer() {
+  if (gameEnded) return;
+
   let newX = playerX;
   let newY = playerY;
   let moved = false;
@@ -264,17 +279,17 @@ function movePlayer() {
   }
 
   if (moved) {
-    try {
-      const pixel = ctx.getImageData(newX + 36, newY + 36, 1, 1).data;
-      const [r, g, b] = pixel;
-      const isPath = r < 100 && g < 100 && b < 100; // dark colors are path
-      if (isPath) {
-        playerX = newX;
-        playerY = newY;
-        player.style.transform = `translate(${playerX}px, ${playerY}px)`;
-      }
-    } catch (e) {
-      // do nothing
+    const playerSize = 72;
+    if (
+      isWalkable(newX, newY) &&
+      newX >= 0 &&
+      newY >= 0 &&
+      newX + playerSize <= canvas.width &&
+      newY + playerSize <= canvas.height
+    ) {
+      playerX = newX;
+      playerY = newY;
+      player.style.transform = `translate(${playerX}px, ${playerY}px)`;
     }
   } else {
     clearAnimation();
@@ -294,6 +309,7 @@ function clearAnimation() {
 }
 
 function checkWin() {
+  if (gameEnded) return;
   const finish = document.getElementById('finishLine').getBoundingClientRect();
   const playerRect = player.getBoundingClientRect();
   if (
@@ -303,6 +319,7 @@ function checkWin() {
     playerRect.bottom > finish.top
   ) {
     clearInterval(timerInterval);
+    gameEnded = true;
     score = timeLeft * 10;
     document.getElementById('score').textContent = `Score: ${score}`;
     document.getElementById('finalScore').textContent = `Your final score: ${score}`;
