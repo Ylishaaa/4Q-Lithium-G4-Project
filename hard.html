@@ -184,7 +184,7 @@
 const canvas = document.getElementById('mazeCanvas');
 const ctx = canvas.getContext('2d');
 const player = document.getElementById('player');
-const step = 3.5;
+const step = 2.5;
 
 let playerX = 0;
 let playerY = 320;
@@ -200,7 +200,7 @@ const jumpscares = ["ezjump1.jpg", "ezjump2.jpg"];
 
 function updateHiScoreDisplay() {
   const hiScore = localStorage.getItem('hiScore') || 0;
-  document.getElementById('hiScore').textContent = `HI-SCORE: ${hiScore}`;
+  document.getElementById('hiScore').textContent = HI-SCORE: ${hiScore};
 }
 
 function resetHiScore() {
@@ -220,7 +220,7 @@ function startTimer() {
   const timerDisplay = document.getElementById('timer');
   timerInterval = setInterval(() => {
     timeLeft--;
-    timerDisplay.textContent = `Time: ${timeLeft}`;
+    timerDisplay.textContent = Time: ${timeLeft};
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
       alert("⏰ Time's up! You didn't complete the level.");
@@ -242,7 +242,8 @@ document.addEventListener('keyup', e => {
 
 function isOnPath(x, y) {
   const offsets = [
-    [0, 0], [71, 0], [0, 71], [71, 71] // top-left, top-right, bottom-left, bottom-right
+    [0, 0], [71, 0], [0, 71], [71, 71],
+    [36, 0], [36, 71], [0, 36], [71, 36]
   ];
   for (const [dx, dy] of offsets) {
     try {
@@ -280,13 +281,13 @@ function movePlayer() {
     moved = true;
   }
 
-  if (moved) {
-    if (isOnPath(newX, newY)) {
-      playerX = newX;
-      playerY = newY;
-      player.style.transform = `translate(${playerX}px, ${playerY}px)`;
-    }
-  } else {
+  if (moved && isOnPath(newX, newY)) {
+    playerX = newX;
+    playerY = newY;
+    player.style.transform = translate(${playerX}px, ${playerY}px);
+  }
+
+  if (!moved) {
     clearAnimation();
   }
 
@@ -296,7 +297,7 @@ function movePlayer() {
 
 function setAnimation(direction) {
   player.classList.remove('walk-up', 'walk-down', 'walk-left', 'walk-right');
-  player.classList.add(`walk-${direction}`);
+  player.classList.add(walk-${direction});
 }
 
 function clearAnimation() {
@@ -314,8 +315,8 @@ function checkWin() {
   ) {
     clearInterval(timerInterval);
     score = timeLeft * 10;
-    document.getElementById('score').textContent = `Score: ${score}`;
-    document.getElementById('finalScore').textContent = `Your final score: ${score}`;
+    document.getElementById('score').textContent = Score: ${score};
+    document.getElementById('finalScore').textContent = Your final score: ${score};
     document.getElementById('winPopup').style.display = 'block';
 
     const hiScore = localStorage.getItem('hiScore') || 0;
@@ -331,7 +332,7 @@ function triggerJumpscare() {
   if (Math.random() < 0.01) {
     const img = jumpscares[Math.floor(Math.random() * jumpscares.length)];
     const jumpscare = document.getElementById('jumpscare');
-    jumpscare.style.backgroundImage = `url('${img}')`;
+    jumpscare.style.backgroundImage = url('${img}');
     jumpscare.style.display = "block";
     jumpscareCount++;
     setTimeout(() => {
