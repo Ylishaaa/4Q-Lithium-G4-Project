@@ -240,6 +240,23 @@ document.addEventListener('keyup', e => {
   clearAnimation();
 });
 
+function isOnPath(x, y) {
+  const offsets = [
+    [0, 0], [71, 0], [0, 71], [71, 71] // top-left, top-right, bottom-left, bottom-right
+  ];
+  for (const [dx, dy] of offsets) {
+    try {
+      const pixel = ctx.getImageData(x + dx, y + dy, 1, 1).data;
+      const [r, g, b] = pixel;
+      const isPath = r < 100 && g < 100 && b < 100;
+      if (!isPath) return false;
+    } catch (e) {
+      return false;
+    }
+  }
+  return true;
+}
+
 function movePlayer() {
   let newX = playerX;
   let newY = playerY;
@@ -264,17 +281,10 @@ function movePlayer() {
   }
 
   if (moved) {
-    try {
-      const pixel = ctx.getImageData(newX + 36, newY + 36, 1, 1).data;
-      const [r, g, b] = pixel;
-      const isPath = r < 100 && g < 100 && b < 100; // dark colors are path
-      if (isPath) {
-        playerX = newX;
-        playerY = newY;
-        player.style.transform = `translate(${playerX}px, ${playerY}px)`;
-      }
-    } catch (e) {
-      // do nothing
+    if (isOnPath(newX, newY)) {
+      playerX = newX;
+      playerY = newY;
+      player.style.transform = `translate(${playerX}px, ${playerY}px)`;
     }
   } else {
     clearAnimation();
