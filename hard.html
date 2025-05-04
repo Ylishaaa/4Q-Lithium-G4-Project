@@ -212,7 +212,7 @@ function resetHiScore() {
 updateHiScoreDisplay();
 
 const mazeImage = new Image();
-mazeImage.src = "maze3.png"; // Make sure this image exists
+mazeImage.src = "hardmaze.png"; // Make sure this image exists
 mazeImage.onload = () => {
   console.log("Maze image loaded.");
   ctx.drawImage(mazeImage, 0, 0, canvas.width, canvas.height);
