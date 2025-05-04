@@ -12,72 +12,88 @@
             text-align: center;
             background: url('DES.1.png') no-repeat center center fixed;
             background-size: cover;
-			margin: 0;
-			padding: 0;
+            margin: 0;
+            padding: 0;
             color: white;
+            min-height: 100vh;
         }
         .header-bar {
-    background: #701e16;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 50px;
-}
+            background: #701e16;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px;
+            position: relative;
+            z-index: 10;
+        }
 
-.logo {
-    font-family: 'Creepster', cursive;
-    font-size: 48px;
-    color: white;
-    text-shadow: 0 0 10px black;
-}
+        .logo {
+            font-family: 'Creepster', cursive;
+            font-size: 48px;
+            color: white;
+            text-shadow: 0 0 10px black;
+        }
 
-.logo .red {
-    color: #c21717;
-}
+        .logo .red {
+            color: #c21717;
+        }
 
-.navbar {
-    display: flex;
-    gap: 40px;
-}
+        .navbar {
+            display: flex;
+            gap: 40px;
+        }
 
-.navbar a {
-    color: white;
-    font-family: 'Creepster', cursive;
-    font-size: 22px;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 12px 20px;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    text-shadow: 0 0 10px black;
-}
+        .navbar a {
+            color: white;
+            font-family: 'Creepster', cursive;
+            font-size: 22px;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px black;
+        }
 
-.navbar a:hover {
-    color: #c21717;
-    text-shadow: 0 0 10px #c21717, 0 0 20px #c21717;
-}
+        .navbar a:hover {
+            color: #c21717;
+            text-shadow: 0 0 10px #c21717, 0 0 20px #c21717;
+        }
 
+        .arrow-btn {
+            position: fixed;
+            top: 50%;
+            right: 50px;
+            transform: translateY(-50%);
+            width: 80px;
+            height: auto;
+            animation: shine 2s infinite;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 5;
+        }
 
-.arrow {
-    position: fixed;
-    margin-top: 290px;
-    right: 540px;
-    width: 80px;
-    height: auto;
-    animation: shine 2s infinite;
-}
+        .arrow-btn img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .arrow-btn:hover img {
+            transform: scale(1.1);
+        }
 
         @keyframes shine {
-    0%, 100% {
-        filter: drop-shadow(0 0 5px black);
-    }
-    50% {
-        filter: drop-shadow(0 0 20px black);
-    }
-}
-
-
+            0%, 100% {
+                filter: drop-shadow(0 0 5px black);
+            }
+            50% {
+                filter: drop-shadow(0 0 20px black);
+            }
+        }
 
         .username-container {
             position: absolute;
@@ -85,6 +101,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
+            z-index: 1;
         }
         h2 {
             margin-bottom: 10px;
@@ -106,27 +123,26 @@
         .start-btn:hover {
             background: #a0a0a0;
         }
-		
     </style>
 </head>
-<header class="header-bar">
-    <h1 class="logo">
-       <span>A-</span><span class="red">MAZE</span>-ING KYLE!
-    </h1>
-
-    <a href="SELECTION OF LEVELS.html">
-        <img src="arrowtoplay.png" alt="arrowtostartplaying" class="arrow">
-    </a>
-    
-    
-    <nav class="navbar">
-      <a href="index.html"> HOME</a>
-      <a href="gamemechanics.html"> GAME MECHANICS</a>
-      <a href="aboutus.html"> ABOUT US</a>
-    </nav>
-</header>
-
 <body onload="checkUsername()">
+    <header class="header-bar">
+        <h1 class="logo">
+           <span>A-</span><span class="red">MAZE</span>-ING KYLE!
+        </h1>
+        
+        <nav class="navbar">
+          <a href="index.html"> HOME</a>
+          <a href="gamemechanics.html"> GAME MECHANICS</a>
+          <a href="aboutus.html"> ABOUT US</a>
+        </nav>
+    </header>
+
+   
+    <button class="arrow-btn" onclick="window.location.href='SELECTION OF LEVELS.html'">
+        <img src="arrowtoplay.png" alt="Play Now">
+    </button>
+
     <div class="username-container">
         <h2 id="greeting">ENTER YOUR USERNAME:</h2>
         <input type="text" id="username" placeholder="Enter username">
