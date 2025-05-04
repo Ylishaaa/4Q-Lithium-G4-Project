@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>HARD</title>
+  <title>EASY</title>
   <style>
     body {
-      background: white;
+      background: green;
       margin: 0;
       overflow: hidden;
       font-family: Arial, sans-serif;
@@ -52,7 +52,7 @@
       animation: walk3 0.6s steps(4) infinite;
     }
     .walk-up {
-      background: url('sprite.png') no-repeat -60px -200px;
+      background: url('sprite.png') no-repeat -60px -210px;
       animation: walk4 0.6s steps(4) infinite;
     }
 
@@ -60,20 +60,17 @@
       from { background-position: -60px -13px; }
       to { background-position: -318px -13px; }
     }
-
     @keyframes walk2 {
       from { background-position: -60px -127px; }
       to { background-position: -318px -127px; }
     }
-
     @keyframes walk3 {
       from { background-position: -60px -190px; }
       to { background-position: -318px -190px; }
     }
-
     @keyframes walk4 {
-      from { background-position: -60px -200px; }
-      to { background-position: -318px -200px; }
+      from { background-position: -60px -210px; }
+      to { background-position: -318px -210px; }
     }
 
     #timer, #score {
@@ -159,7 +156,7 @@
 </head>
 <body>
 
-<div id="timer">Time: 600</div>
+<div id="timer">Time: 360</div>
 <div id="score">Score: 0</div>
 <div id="hiScore">HI-SCORE: 0</div>
 <button id="resetButton" onclick="resetHiScore()">Reset HI-SCORE</button>
@@ -194,7 +191,7 @@ let playerY = 320;
 
 let keysPressed = {};
 let score = 0;
-let timeLeft = 600;
+let timeLeft = 360;
 let timerStarted = false;
 let timerInterval;
 let jumpscareCount = 0;
@@ -266,18 +263,23 @@ function movePlayer() {
     moved = true;
   }
 
-  try {
-    const pixel = ctx.getImageData(newX + 36, newY + 36, 1, 1).data;
-    const [r, g, b] = pixel;
-    const isPath = r < 100 && g < 100 && b < 100;
-    if (isPath) {
-      playerX = newX;
-      playerY = newY;
-      player.style.transform = translate(${playerX}px, ${playerY}px);
+  if (moved) {
+    try {
+      const pixel = ctx.getImageData(newX + 36, newY + 36, 1, 1).data;
+      const [r, g, b] = pixel;
+      const isPath = r < 100 && g < 100 && b < 100; // dark colors are path
+      if (isPath) {
+        playerX = newX;
+        playerY = newY;
+        player.style.transform = `translate(${playerX}px, ${playerY}px)`;
+      }
+    } catch (e) {
+      // do nothing
     }
-  } catch (e) {}
+  } else {
+    clearAnimation();
+  }
 
-  if (!moved) clearAnimation();
   triggerJumpscare();
   checkWin();
 }
