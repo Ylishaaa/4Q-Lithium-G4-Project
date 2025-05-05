@@ -244,15 +244,6 @@ document.addEventListener('keyup', e => {
   clearAnimation();
 });
 
-function isWalkable(x, y) {
-  try {
-    const pixel = ctx.getImageData(x + 36, y + 36, 1, 1).data;
-    return pixel[0] < 100 && pixel[1] < 100 && pixel[2] < 100;
-  } catch {
-    return false;
-  }
-}
-
 function movePlayer() {
   if (gameEnded) return;
 
