@@ -321,8 +321,8 @@ function checkWin() {
     clearInterval(timerInterval);
     gameEnded = true;
     score = timeLeft * 10;
-    document.getElementById('score').textContent = Score: ${score};
-    document.getElementById('finalScore').textContent = Your final score: ${score};
+    document.getElementById('score').textContent = `Score: ${score}`;
+    document.getElementById('finalScore').textContent = `Your final score: ${score}`;
     document.getElementById('winPopup').style.display = 'block';
 
     const hiScore = localStorage.getItem('hiScore') || 0;
@@ -338,7 +338,7 @@ function triggerJumpscare() {
   if (Math.random() < 0.01) {
     const img = jumpscares[Math.floor(Math.random() * jumpscares.length)];
     const jumpscare = document.getElementById('jumpscare');
-    jumpscare.style.backgroundImage = url('${img}');
+    jumpscare.style.backgroundImage = `url('${img}')`;
     jumpscare.style.display = "block";
     jumpscareCount++;
     setTimeout(() => {
