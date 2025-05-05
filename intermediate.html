@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>INTER LEVE</title>
   <style>
-    body {
+     body {
       background: green;
       margin: 0;
       overflow: hidden;
@@ -16,6 +16,8 @@
       width: 1000px;
       height: 1000px;
       margin: 0 auto;
+      border: 8px solid green; 
+      box-sizing: content-box; 
     }
 
     canvas, .player, #finishLine {
@@ -139,8 +141,8 @@
     #finishLine {
       width: 30px;
       height: 30px;
-      top: 460px;
-      left: 730px;
+      top: 950px;
+      left: 810px;
       background: linear-gradient(to right, limegreen, yellow);
       z-index: 1;
       border: 2px solid white;
@@ -156,7 +158,7 @@
 </head>
 <body>
 
-<div id="timer">Time: 180</div>
+<div id="timer">Time: 60</div>
 <div id="score">Score: 0</div>
 <div id="hiScore">HI-SCORE: 0</div>
 <button id="resetButton" onclick="resetHiScore()">Reset HI-SCORE</button>
@@ -184,7 +186,7 @@
 const canvas = document.getElementById('mazeCanvas');
 const ctx = canvas.getContext('2d');
 const player = document.getElementById('player');
-const step = 5;
+const step = 3.5;
 
 let playerX = 0;
 let playerY = 320;
@@ -195,7 +197,8 @@ let timeLeft = 180;
 let timerStarted = false;
 let timerInterval;
 let jumpscareCount = 0;
-const maxJumpscares = 4;
+let gameEnded = false;
+const maxJumpscares = 2;
 const jumpscares = ["ezjump1.jpg", "ezjump2.jpg"];
 
 function updateHiScoreDisplay() {
@@ -211,7 +214,7 @@ function resetHiScore() {
 updateHiScoreDisplay();
 
 const mazeImage = new Image();
-mazeImage.src = "maze2.jpg";
+mazeImage.src = "maze2.png";
 mazeImage.onload = () => {
   ctx.drawImage(mazeImage, 0, 0, canvas.width, canvas.height);
 };
@@ -230,7 +233,8 @@ function startTimer() {
 
 document.addEventListener('keydown', e => {
   keysPressed[e.key.toLowerCase()] = true;
-  if (!timerStarted) {
+  const movementKeys = ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd'];
+  if (!timerStarted && movementKeys.includes(e.key.toLowerCase())) {
     startTimer();
     timerStarted = true;
   }
@@ -240,7 +244,18 @@ document.addEventListener('keyup', e => {
   clearAnimation();
 });
 
+function isWalkable(x, y) {
+  try {
+    const pixel = ctx.getImageData(x + 36, y + 36, 1, 1).data;
+    return pixel[0] < 100 && pixel[1] < 100 && pixel[2] < 100;
+  } catch {
+    return false;
+  }
+}
+
 function movePlayer() {
+  if (gameEnded) return;
+
   let newX = playerX;
   let newY = playerY;
   let moved = false;
@@ -264,17 +279,17 @@ function movePlayer() {
   }
 
   if (moved) {
-    try {
-      const pixel = ctx.getImageData(newX + 36, newY + 36, 1, 1).data;
-      const [r, g, b] = pixel;
-      const isPath = r < 100 && g < 100 && b < 100; // dark colors are path
-      if (isPath) {
-        playerX = newX;
-        playerY = newY;
-        player.style.transform = translate(${playerX}px, ${playerY}px);
-      }
-    } catch (e) {
-      // do nothing
+    const playerSize = 72;
+    if (
+      isWalkable(newX, newY) &&
+      newX >= 0 &&
+      newY >= 0 &&
+      newX + playerSize <= canvas.width &&
+      newY + playerSize <= canvas.height
+    ) {
+      playerX = newX;
+      playerY = newY;
+      player.style.transform = translate(${playerX}px, ${playerY}px);
     }
   } else {
     clearAnimation();
@@ -294,6 +309,7 @@ function clearAnimation() {
 }
 
 function checkWin() {
+  if (gameEnded) return;
   const finish = document.getElementById('finishLine').getBoundingClientRect();
   const playerRect = player.getBoundingClientRect();
   if (
@@ -303,6 +319,7 @@ function checkWin() {
     playerRect.bottom > finish.top
   ) {
     clearInterval(timerInterval);
+    gameEnded = true;
     score = timeLeft * 10;
     document.getElementById('score').textContent = Score: ${score};
     document.getElementById('finalScore').textContent = Your final score: ${score};
