@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>MEDIUM LEVEL</title>
+  <title>MED LEVEL</title>
   <style>
      body {
       background: green;
@@ -37,9 +37,12 @@
       height: 72px;
       background: url('sprite.png') no-repeat -60px -13px;
       background-size: 384px 288px;
+      position: absolute;
       z-index: 2;
-      transform: translate(0px, 320px);
+      top: 320px;
+      left: 20px;
     }
+
 
     .walk-down {
       background: url('sprite_down.png') no-repeat -60px -13px;
@@ -192,13 +195,8 @@ const player = document.getElementById('player');
 
 const step = 3.5;
 
-
-
-let playerX = 0;
-
+let playerX = 20;
 let playerY = 320;
-
-
 
 let keysPressed = {};
 
@@ -378,7 +376,9 @@ function movePlayer() {
 
       playerY = newY;
 
-      player.style.transform = `translate(${playerX}px, ${playerY}px)`;
+      player.style.left = `${playerX}px`;
+      player.style.top = `${playerY}px`;
+
 
     }
 
