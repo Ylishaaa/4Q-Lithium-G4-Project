@@ -397,7 +397,7 @@ function isWalkable(x, y) {
   const imageData = ctx.getImageData(x + 36, y + 36, 1, 1); // Center of sprite
   const [r, g, b] = imageData.data;
   // White path: (255,255,255), or light shades
-  return r + g + b > 600;
+  return r + g + b > 100;
 }
 
 
