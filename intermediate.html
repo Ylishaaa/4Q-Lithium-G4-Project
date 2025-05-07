@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>INTER LEVEL</title>
+  <title>MEDIUM LEVEL</title>
   <style>
      body {
       background: green;
@@ -249,10 +249,10 @@ const mazeImage = new Image();
 mazeImage.src = "maze2.png";
 
 mazeImage.onload = () => {
-
   ctx.drawImage(mazeImage, 0, 0, canvas.width, canvas.height);
-
+  gameLoop();
 };
+
 
 
 
@@ -396,6 +396,13 @@ function movePlayer() {
 
 }
 
+function isWalkable(x, y) {
+  const imageData = ctx.getImageData(x + 36, y + 36, 1, 1); // Center of sprite
+  const [r, g, b] = imageData.data;
+  // White path: (255,255,255), or light shades
+  return r + g + b > 600;
+}
+
 
 
 function setAnimation(direction) {
@@ -495,12 +502,13 @@ function triggerJumpscare() {
 
 
 function gameLoop() {
-
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(mazeImage, 0, 0, canvas.width, canvas.height);
+  
   movePlayer();
-
   requestAnimationFrame(gameLoop);
-
 }
+
 
 
 
