@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Ez</title>
+  <title>EASY</title>
   <style>
     body {
   background: url('bgdesign.png') repeat;
@@ -247,24 +247,14 @@ document.addEventListener('keyup', e => {
 });
 
 function isWalkable(x, y) {
-  const size = 72; // player size
-  const points = [
-    [x + 5, y + 5],
-    [x + size - 5, y + 5],
-    [x + 5, y + size - 5],
-    [x + size - 5, y + size - 5]
-  ];
-
-  for (let [px, py] of points) {
-    if (px < 0 || py < 0 || px >= canvas.width || py >= canvas.height) return false;
-
-    const pixel = ctx.getImageData(px, py, 1, 1).data;
-    const isWall = pixel[0] > 100 || pixel[1] > 100 || pixel[2] > 100; // not dark = wall
-    if (isWall) return false;
+  try {
+    const pixel = ctx.getImageData(x + 36, y + 36, 1, 1).data;
+    return pixel[0] < 100 && pixel[1] < 100 && pixel[2] < 100;
+  } catch {
+    return false;
   }
-  return true;
 }
-
+  
 function movePlayer() {
   if (gameEnded) return;
 
