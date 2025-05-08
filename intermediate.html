@@ -18,8 +18,8 @@
       width: 1000px;
       height: 1000px;
       margin: 0 auto;
-      border: 8px solid green; 
-      box-sizing: content-box; 
+      border: 8px solid green; /* ✅ Added blue border */
+      box-sizing: content-box; /* ✅ Keeps 1000x1000 canvas area inside the border */
     }
 
     canvas, .player, #finishLine {
@@ -35,14 +35,13 @@
     }
 
     .player {
-  width: 72px;
-  height: 72px;
-  background: url('sprite.png') no-repeat -60px -13px;
-  background-size: 384px 288px;
-  z-index: 2;
-  top: 0;
-  left: 0;
-}
+      width: 72px;
+      height: 72px;
+      background: url('sprite.png') no-repeat -60px -13px;
+      background-size: 384px 288px;
+      z-index: 2;
+      transform: translate(0px, 320px);
+    }
 
     .walk-down {
       background: url('sprite_down.png') no-repeat -60px -13px;
@@ -141,17 +140,16 @@
       font-size: 16px;
     }
 
-    #finishLine { 
-  width: 30px;
-  height: 30px;
-  top: 120px;
-  left: 970px;
-  background: linear-gradient(to right, limegreen, yellow);
-  z-index: 1;
-  border: 2px solid white;
-  animation: pulse 1s infinite;
-}
-
+    #finishLine {
+      width: 30px;
+      height: 30px;
+      top: 460px;
+      left: 730px;
+      background: linear-gradient(to right, limegreen, yellow);
+      z-index: 1;
+      border: 2px solid white;
+      animation: pulse 1s infinite;
+    }
 
     @keyframes pulse {
       0% { box-shadow: 0 0 5px 2px limegreen; }
@@ -207,7 +205,7 @@ const jumpscares = ["ezjump1.jpg", "ezjump2.jpg"];
 
 function updateHiScoreDisplay() {
   const hiScore = localStorage.getItem('hiScore') || 0;
-  document.getElementById('hiScore').textContent = `HI-SCORE: ${hiScore}`;
+  document.getElementById('hiScore').textContent = HI-SCORE: ${hiScore};
 }
 
 function resetHiScore() {
@@ -218,20 +216,16 @@ function resetHiScore() {
 updateHiScoreDisplay();
 
 const mazeImage = new Image();
-mazeImage.src = "med-maze.png";
-
+mazeImage.src = "maze2.png";
 mazeImage.onload = () => {
   ctx.drawImage(mazeImage, 0, 0, canvas.width, canvas.height);
-  player.style.transform = `translate(${playerX}px, ${playerY}px)`; 
-  gameLoop(); 
 };
-
 
 function startTimer() {
   const timerDisplay = document.getElementById('timer');
   timerInterval = setInterval(() => {
     timeLeft--;
-    timerDisplay.textContent = `Time: ${timeLeft}`;
+    timerDisplay.textContent = Time: ${timeLeft};
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
       alert("⏰ Time's up! You didn't complete the level.");
@@ -254,21 +248,12 @@ document.addEventListener('keyup', e => {
 
 function isWalkable(x, y) {
   try {
-    const data = ctx.getImageData(x + 36, y + 36, 5, 5).data;
-    let total = 0;
-    for (let i = 0; i < data.length; i += 4) {
-      const brightness = (data[i] + data[i + 1] + data[i + 2]) / 3;
-      total += brightness;
-    }
-    const avg = total / (data.length / 4);
-    return avg > 100; // Loosened threshold for walkability
+    const pixel = ctx.getImageData(x + 36, y + 36, 1, 1).data;
+    return pixel[0] < 100 && pixel[1] < 100 && pixel[2] < 100;
   } catch {
     return false;
   }
 }
-
-
-
 
 function movePlayer() {
   if (gameEnded) return;
@@ -306,8 +291,7 @@ function movePlayer() {
     ) {
       playerX = newX;
       playerY = newY;
-      player.style.transform = `translate(${playerX}px, ${playerY}px)`;
-
+      player.style.transform = translate(${playerX}px, ${playerY}px);
     }
   } else {
     clearAnimation();
@@ -319,7 +303,7 @@ function movePlayer() {
 
 function setAnimation(direction) {
   player.classList.remove('walk-up', 'walk-down', 'walk-left', 'walk-right');
-  player.classList.add(`walk-${direction}`);
+  player.classList.add(walk-${direction});
 }
 
 function clearAnimation() {
@@ -339,8 +323,8 @@ function checkWin() {
     clearInterval(timerInterval);
     gameEnded = true;
     score = timeLeft * 10;
-    document.getElementById('score').textContent = `Score: ${score}`;
-    document.getElementById('finalScore').textContent = `Your final score: ${score}`;
+    document.getElementById('score').textContent = Score: ${score};
+    document.getElementById('finalScore').textContent = Your final score: ${score};
     document.getElementById('winPopup').style.display = 'block';
 
     const hiScore = localStorage.getItem('hiScore') || 0;
@@ -356,7 +340,7 @@ function triggerJumpscare() {
   if (Math.random() < 0.01) {
     const img = jumpscares[Math.floor(Math.random() * jumpscares.length)];
     const jumpscare = document.getElementById('jumpscare');
-    jumpscare.style.backgroundImage = `url('${img}')`;
+    jumpscare.style.backgroundImage = url('${img}');
     jumpscare.style.display = "block";
     jumpscareCount++;
     setTimeout(() => {
@@ -370,6 +354,7 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 }
 
+gameLoop();
 </script>
 
 
