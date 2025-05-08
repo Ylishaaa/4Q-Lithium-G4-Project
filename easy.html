@@ -2,40 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>EASY LEVEL</title>
+  <title>Ez LEVEL</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-
     body {
       background-image: url('bgdesign.png');
-      background-repeat: repeat;
+      background-repeat: repeat-x;
+      background-repeat: repeat-y;
       font-family: Arial, sans-serif;
     }
 
     .maze-container {
       position: relative;
-      width: 1500px;
-      height: 1500px;
-      margin: 20px auto 0;
-      border: 8px solid green;
-      box-sizing: content-box;
+      width: 1000px;
+      height: 1000px;
+      margin: 0 auto;
+      border: 8px solid green; 
+      box-sizing: content-box; 
+    }
+
+    canvas, .player, #finishLine {
+      position: absolute;
+      top: -100px;
+      left: 0;
     }
 
     canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       z-index: 1;
     }
 
     .player {
-      position: absolute;
       width: 72px;
       height: 72px;
       background: url('sprite.png') no-repeat -60px -13px;
@@ -142,7 +139,6 @@
     }
 
     #finishLine {
-      position: absolute;
       width: 30px;
       height: 30px;
       top: 460px;
@@ -172,7 +168,7 @@
 </a>
 
 <div class="maze-container">
-  <canvas id="mazeCanvas" width="1500" height="1500"></canvas>
+  <canvas id="mazeCanvas" width="1000" height="1000"></canvas>
   <div id="finishLine"></div>
   <div class="player" id="player"></div>
 </div>
@@ -207,7 +203,7 @@ const jumpscares = ["ezjump1.jpg", "ezjump2.jpg"];
 
 function updateHiScoreDisplay() {
   const hiScore = localStorage.getItem('hiScore') || 0;
-  document.getElementById('hiScore').textContent = `HI-SCORE: ${hiScore}`;
+  document.getElementById('hiScore').textContent = HI-SCORE: ${hiScore};
 }
 
 function resetHiScore() {
@@ -227,7 +223,7 @@ function startTimer() {
   const timerDisplay = document.getElementById('timer');
   timerInterval = setInterval(() => {
     timeLeft--;
-    timerDisplay.textContent = `Time: ${timeLeft}`;
+    timerDisplay.textContent = Time: ${timeLeft};
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
       alert("⏰ Time's up! You didn't complete the level.");
@@ -293,7 +289,7 @@ function movePlayer() {
     ) {
       playerX = newX;
       playerY = newY;
-      player.style.transform = `translate(${playerX}px, ${playerY}px)`;
+      player.style.transform = translate(${playerX}px, ${playerY}px);
     }
   } else {
     clearAnimation();
@@ -305,7 +301,7 @@ function movePlayer() {
 
 function setAnimation(direction) {
   player.classList.remove('walk-up', 'walk-down', 'walk-left', 'walk-right');
-  player.classList.add(`walk-${direction}`);
+  player.classList.add(walk-${direction});
 }
 
 function clearAnimation() {
@@ -325,8 +321,8 @@ function checkWin() {
     clearInterval(timerInterval);
     gameEnded = true;
     score = timeLeft * 10;
-    document.getElementById('score').textContent = `Score: ${score}`;
-    document.getElementById('finalScore').textContent = `Your final score: ${score}`;
+    document.getElementById('score').textContent = Score: ${score};
+    document.getElementById('finalScore').textContent = Your final score: ${score};
     document.getElementById('winPopup').style.display = 'block';
 
     const hiScore = localStorage.getItem('hiScore') || 0;
@@ -342,7 +338,7 @@ function triggerJumpscare() {
   if (Math.random() < 0.01) {
     const img = jumpscares[Math.floor(Math.random() * jumpscares.length)];
     const jumpscare = document.getElementById('jumpscare');
-    jumpscare.style.backgroundImage = `url('${img}')`;
+    jumpscare.style.backgroundImage = url('${img}');
     jumpscare.style.display = "block";
     jumpscareCount++;
     setTimeout(() => {
