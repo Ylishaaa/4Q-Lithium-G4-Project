@@ -212,34 +212,18 @@ const maxJumpscares = 2;
 
 const jumpscares = ["ezjump1.jpg", "ezjump2.jpg"];
 
-
-
 function updateHiScoreDisplay() {
-
   const hiScore = localStorage.getItem('hiScore') || 0;
-
   document.getElementById('hiScore').textContent = `HI-SCORE: ${hiScore}`;
-
 }
-
-
 
 function resetHiScore() {
-
   localStorage.removeItem('hiScore');
-
   updateHiScoreDisplay();
-
 }
-
-
-
 updateHiScoreDisplay();
 
-
-
 const mazeImage = new Image();
-
 mazeImage.src = "maze2.png";
 
 mazeImage.onload = () => {
@@ -247,67 +231,37 @@ mazeImage.onload = () => {
   gameLoop();
 };
 
-
-
-
 function startTimer() {
-
   const timerDisplay = document.getElementById('timer');
-
   timerInterval = setInterval(() => {
-
     timeLeft--;
-
     timerDisplay.textContent = Time: ${timeLeft};
-
     if (timeLeft <= 0) {
-
       clearInterval(timerInterval);
-
       alert("⏰ Time's up! You didn't complete the level.");
-
     }
-
   }, 1000);
 
 }
-
-
-
+  
 document.addEventListener('keydown', e => {
-
   keysPressed[e.key.toLowerCase()] = true;
-
   const movementKeys = ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd'];
-
   if (!timerStarted && movementKeys.includes(e.key.toLowerCase())) {
-
     startTimer();
-
     timerStarted = true;
-
   }
-
 });
 
 document.addEventListener('keyup', e => {
-
   delete keysPressed[e.key.toLowerCase()];
-
   clearAnimation();
-
 });
 
-
-
 function movePlayer() {
-
   if (gameEnded) return;
 
-
-
   let newX = playerX;
-
   let newY = playerY;
 
   let moved = false;
