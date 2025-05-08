@@ -190,7 +190,7 @@ const ctx = canvas.getContext('2d');
 const player = document.getElementById('player');
 const step = 3.5;
 
-let playerX = 0;
+let playerX = 50;
 let playerY = 320;
 
 let keysPressed = {};
@@ -216,7 +216,7 @@ function resetHiScore() {
 updateHiScoreDisplay();
 
 const mazeImage = new Image();
-mazeImage.src = "maze1.png";
+mazeImage.src = "maze.png";
 mazeImage.onload = () => {
   ctx.drawImage(mazeImage, 0, 0, canvas.width, canvas.height);
 };
