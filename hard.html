@@ -2,21 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>HARD LEVE</title>
+  <title>HARD LEVEL</title>
   <style>
     body {
-      background: green;
-      margin: 0;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-    }
+    background: url('bgdesign.png') repeat;
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+  }
 
-    .maze-container {
-      position: relative;
-      width: 1000px;
-      height: 1000px;
-      margin: 0 auto;
-    }
+  .maze-container {
+    position: relative;
+    width: 1000px;
+    height: 1000px;
+    margin: 0 auto;
+    border: 8px solid green; 
+    box-sizing: content-box; 
+    background: url('maze3.png') no-repeat;
+    background-size: cover;
+  }
+
 
     canvas, .player, #finishLine {
       position: absolute;
@@ -183,21 +188,27 @@
 
 <script>
 const canvas = document.getElementById('mazeCanvas');
-const ctx = canvas.getContext('2d');
-const player = document.getElementById('player');
-const step = 3.5;
+  const ctx = canvas.getContext('2d');
+  const player = document.getElementById('player');
 
-let playerX = 0;
-let playerY = 320;
+  const step = 3.5;
+  let playerX = 320;
+  let playerY = 195;
+  let keysPressed = {};
+  let score = 0;
+  let timeLeft = 180;
+  let timerStarted = false;
+  let timerInterval;
+  let jumpscareCount = 0;
+  let gameEnded = false;
+  const maxJumpscares = 2;
+  const jumpscares = ["ezjump1.jpg", "ezjump2.jpg"];
 
-let keysPressed = {};
-let score = 0;
-let timeLeft = 360;
-let timerStarted = false;
-let timerInterval;
-let jumpscareCount = 0;
-const maxJumpscares = 2;
-const jumpscares = ["ezjump1.jpg", "ezjump2.jpg"];
+  // 🟩 Remove drawing from image — just start loop
+  function gameLoop() {
+    movePlayer();
+    requestAnimationFrame(gameLoop);
+  }
 
 function updateHiScoreDisplay() {
   const hiScore = localStorage.getItem('hiScore') || 0;
@@ -212,7 +223,7 @@ function resetHiScore() {
 updateHiScoreDisplay();
 
 const mazeImage = new Image();
-mazeImage.src = "maze3.jpg"; // Make sure this image exists
+mazeImage.src = "maze3.jpg"; 
 mazeImage.onload = () => {
   console.log("Maze image loaded.");
   ctx.drawImage(mazeImage, 0, 0, canvas.width, canvas.height);
