@@ -263,86 +263,45 @@ function movePlayer() {
 
   let newX = playerX;
   let newY = playerY;
-
   let moved = false;
 
-
-
   if (keysPressed['arrowup'] || keysPressed['w']) {
-
     newY -= step;
-
     setAnimation('up');
-
     moved = true;
-
   } else if (keysPressed['arrowdown'] || keysPressed['s']) {
-
     newY += step;
-
     setAnimation('down');
-
     moved = true;
-
   } else if (keysPressed['arrowleft'] || keysPressed['a']) {
-
     newX -= step;
-
     setAnimation('left');
-
     moved = true;
-
   } else if (keysPressed['arrowright'] || keysPressed['d']) {
-
     newX += step;
-
     setAnimation('right');
-
     moved = true;
-
   }
-
-
 
   if (moved) {
-
     const playerSize = 72;
-
     if (
-
       isWalkable(newX, newY) &&
-
       newX >= 0 &&
-
       newY >= 0 &&
-
       newX + playerSize <= canvas.width &&
-
       newY + playerSize <= canvas.height
-
     ) {
-
       playerX = newX;
-
       playerY = newY;
-
-       player.style.transform = translate(${playerX}px, ${playerY}px);
-
-
+      player.style.transform = `translate(${playerX}px, ${playerY}px)`;
     }
-
   } else {
-
     clearAnimation();
-
   }
 
-
-
   triggerJumpscare();
-
   checkWin();
-
 }
 
 function isWalkable(x, y) {
