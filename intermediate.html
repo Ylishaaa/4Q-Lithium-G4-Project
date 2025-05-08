@@ -2,31 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>MEDIUM</title>
+  <title>MED</title>
   <style>
-     body {
-      background: green;
-      margin: 0;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-    }
+    body {
+  background: url('bgdesign.png') repeat;
+  background-size: cover;
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
 
     .maze-container {
-  position: relative;
-  width: 90vw;
-  height: 90vw;
-  max-width: 1000px;
-  max-height: 1000px;
-  margin: 0 auto;
-  border: 8px solid green;
-}
+      position: relative;
+      width: 1000px;
+      height: 1000px;
+      margin: 0 auto;
+      border: 8px solid green; /* ✅ Added blue border */
+      box-sizing: content-box; /* ✅ Keeps 1000x1000 canvas area inside the border */
+    }
 
-canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
+    canvas, .player, #finishLine {
+      position: absolute;
+      top: -100px;
+      left: 0;
+    }
 
     canvas {
       width: 100%;
@@ -40,9 +40,8 @@ canvas {
       background: url('sprite.png') no-repeat -60px -13px;
       background-size: 384px 288px;
       z-index: 2;
-      transform: translate(195px, 320px);;
+      transform: translate(0px, 320px);
     }
-
 
     .walk-down {
       background: url('sprite_down.png') no-repeat -60px -13px;
@@ -144,8 +143,8 @@ canvas {
     #finishLine {
       width: 30px;
       height: 30px;
-      top: 950px;
-      left: 810px;
+      top: 460px;
+      left: 730px;
       background: linear-gradient(to right, limegreen, yellow);
       z-index: 1;
       border: 2px solid white;
@@ -186,13 +185,14 @@ canvas {
 </div>
 
 <script>
-
 const canvas = document.getElementById('mazeCanvas');
 const ctx = canvas.getContext('2d');
 const player = document.getElementById('player');
 const step = 3.5;
-let playerX = 320px;
-let playerY = 195px;
+
+let playerX = 320;
+let playerY = 195;
+
 let keysPressed = {};
 let score = 0;
 let timeLeft = 180;
@@ -200,7 +200,7 @@ let timerStarted = false;
 let timerInterval;
 let jumpscareCount = 0;
 let gameEnded = false;
-const maxJumpscares = 3;
+const maxJumpscares = 2;
 const jumpscares = ["ezjump1.jpg", "ezjump2.jpg"];
 
 function updateHiScoreDisplay() {
@@ -216,13 +216,9 @@ function resetHiScore() {
 updateHiScoreDisplay();
 
 const mazeImage = new Image();
-mazeImage.src = "maze3.png";
-
+mazeImage.src = "maze2.png";
 mazeImage.onload = () => {
-  canvas.width = mazeImage.width;
-  canvas.height = mazeImage.height;
-  ctx.drawImage(mazeImage, 0, 0);
-  gameLoop();
+  ctx.drawImage(mazeImage, 0, 0, canvas.width, canvas.height);
 };
 
 function startTimer() {
@@ -245,14 +241,23 @@ document.addEventListener('keydown', e => {
     timerStarted = true;
   }
 });
-
 document.addEventListener('keyup', e => {
   delete keysPressed[e.key.toLowerCase()];
   clearAnimation();
 });
 
+function isWalkable(x, y) {
+  try {
+    const pixel = ctx.getImageData(x + 36, y + 36, 1, 1).data;
+    return pixel[0] < 100 && pixel[1] < 100 && pixel[2] < 100;
+  } catch {
+    return false;
+  }
+}
+
 function movePlayer() {
   if (gameEnded) return;
+
   let newX = playerX;
   let newY = playerY;
   let moved = false;
@@ -296,12 +301,6 @@ function movePlayer() {
   checkWin();
 }
 
-function isWalkable(x, y) {
-  const imageData = ctx.getImageData(x + 36, y + 36, 1, 1);
-  const [r, g, b] = imageData.data;
-  return r + g + b > 100;
-}
-
 function setAnimation(direction) {
   player.classList.remove('walk-up', 'walk-down', 'walk-left', 'walk-right');
   player.classList.add(`walk-${direction}`);
@@ -313,10 +312,8 @@ function clearAnimation() {
 
 function checkWin() {
   if (gameEnded) return;
-
   const finish = document.getElementById('finishLine').getBoundingClientRect();
   const playerRect = player.getBoundingClientRect();
-
   if (
     playerRect.left < finish.right &&
     playerRect.right > finish.left &&
@@ -353,14 +350,13 @@ function triggerJumpscare() {
 }
 
 function gameLoop() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(mazeImage, 0, 0);
   movePlayer();
   requestAnimationFrame(gameLoop);
 }
 
-
+gameLoop();
 </script>
+
 
 </body>
 </html>
