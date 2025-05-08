@@ -5,14 +5,16 @@
   <title>MEDIUM LEVEL</title>
   <style>
      body {
-      background-image: url('bgdesign.png');
-      background-repeat: repeat;
+      background: green;
+      margin: 0;
+      overflow: hidden;
       font-family: Arial, sans-serif;
     }
+
     .maze-container {
       position: relative;
-      width: 1500px;
-      height: 1500px;
+      width: 1000px;
+      height: 1000px;
       margin: 0 auto;
       border: 8px solid green; 
       box-sizing: content-box; 
@@ -20,8 +22,8 @@
 
     canvas, .player, #finishLine {
       position: absolute;
-      top: 30px;
-      left: 30px;
+      top: 0;
+      left: 0;
     }
 
     canvas {
@@ -212,18 +214,34 @@ const maxJumpscares = 2;
 
 const jumpscares = ["ezjump1.jpg", "ezjump2.jpg"];
 
+
+
 function updateHiScoreDisplay() {
+
   const hiScore = localStorage.getItem('hiScore') || 0;
+
   document.getElementById('hiScore').textContent = `HI-SCORE: ${hiScore}`;
+
 }
+
+
 
 function resetHiScore() {
+
   localStorage.removeItem('hiScore');
+
   updateHiScoreDisplay();
+
 }
+
+
+
 updateHiScoreDisplay();
 
+
+
 const mazeImage = new Image();
+
 mazeImage.src = "maze2.png";
 
 mazeImage.onload = () => {
@@ -231,95 +249,173 @@ mazeImage.onload = () => {
   gameLoop();
 };
 
+
+
+
 function startTimer() {
+
   const timerDisplay = document.getElementById('timer');
+
   timerInterval = setInterval(() => {
+
     timeLeft--;
+
     timerDisplay.textContent = `Time: ${timeLeft}`;
+
     if (timeLeft <= 0) {
+
       clearInterval(timerInterval);
+
       alert("⏰ Time's up! You didn't complete the level.");
+
     }
+
   }, 1000);
 
 }
-  
+
+
+
 document.addEventListener('keydown', e => {
+
   keysPressed[e.key.toLowerCase()] = true;
+
   const movementKeys = ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd'];
+
   if (!timerStarted && movementKeys.includes(e.key.toLowerCase())) {
+
     startTimer();
+
     timerStarted = true;
+
   }
+
 });
 
 document.addEventListener('keyup', e => {
+
   delete keysPressed[e.key.toLowerCase()];
+
   clearAnimation();
+
 });
 
+
+
 function movePlayer() {
+
   if (gameEnded) return;
 
+
+
   let newX = playerX;
+
   let newY = playerY;
+
   let moved = false;
 
+
+
   if (keysPressed['arrowup'] || keysPressed['w']) {
+
     newY -= step;
+
     setAnimation('up');
+
     moved = true;
+
   } else if (keysPressed['arrowdown'] || keysPressed['s']) {
+
     newY += step;
+
     setAnimation('down');
+
     moved = true;
+
   } else if (keysPressed['arrowleft'] || keysPressed['a']) {
+
     newX -= step;
+
     setAnimation('left');
+
     moved = true;
+
   } else if (keysPressed['arrowright'] || keysPressed['d']) {
+
     newX += step;
+
     setAnimation('right');
+
     moved = true;
+
   }
+
+
 
   if (moved) {
+
     const playerSize = 72;
+
     if (
+
       isWalkable(newX, newY) &&
+
       newX >= 0 &&
+
       newY >= 0 &&
+
       newX + playerSize <= canvas.width &&
+
       newY + playerSize <= canvas.height
+
     ) {
+
       playerX = newX;
+
       playerY = newY;
-      player.style.transform = `translate(${playerX}px, ${playerY}px)`;
+
+       player.style.transform = `translate(${playerX}px, ${playerY}px)`;
+
+
     }
+
   } else {
+
     clearAnimation();
+
   }
 
+
+
   triggerJumpscare();
+
   checkWin();
+
 }
 
 function isWalkable(x, y) {
   const imageData = ctx.getImageData(x + 36, y + 36, 1, 1); // Center of sprite
   const [r, g, b] = imageData.data;
   // White path: (255,255,255), or light shades
-  return r + g + b > 100;
+  return r + g + b > 600;
 }
 
 
 
 function setAnimation(direction) {
+
   player.classList.remove('walk-up', 'walk-down', 'walk-left', 'walk-right');
+
   player.classList.add(`walk-${direction}`);
+
 }
 
+
+
 function clearAnimation() {
+
   player.classList.remove('walk-up', 'walk-down', 'walk-left', 'walk-right');
+
 }
 
 
@@ -384,7 +480,7 @@ function triggerJumpscare() {
 
     const jumpscare = document.getElementById('jumpscare');
 
-    jumpscare.style.backgroundImage = url('${img}');
+    jumpscare.style.backgroundImage = `url('${img}')`;
 
     jumpscare.style.display = "block";
 
