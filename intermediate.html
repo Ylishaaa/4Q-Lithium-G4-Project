@@ -204,12 +204,12 @@ const maxJumpscares = 2;
 const jumpscares = ["ezjump1.jpg", "ezjump2.jpg"];
 
 function updateHiScoreDisplay() {
-  const hiScore = localStorage.getItem('hiScore') || 0;
-  document.getElementById('hiScore').textContent = HI-SCORE: ${hiScore};
+  const hiScore = localStorage.getItem('hiScore1') || 0;
+  document.getElementById('hiScore1').textContent = HI-SCORE: ${hiScore1};
 }
 
 function resetHiScore() {
-  localStorage.removeItem('hiScore');
+  localStorage.removeItem('hiScore1');
   updateHiScoreDisplay();
 }
 
